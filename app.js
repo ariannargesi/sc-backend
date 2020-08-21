@@ -20,7 +20,7 @@ db.once('open', () => {
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
-
+}
 app.listen(port, () => {
     console.log('app is running on port')
 })
@@ -31,9 +31,5 @@ app.post('/new', (req, res)  => {
     const feedback = new schema({content, date})
     feedback.save().then(() => {
         res.send({ result: true})
-    })  
-})
-
-app.get('/', (req, res) => {
-    res.send({status: 'running'})
+    })
 })
