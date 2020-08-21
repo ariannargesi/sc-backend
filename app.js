@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (err, result) => {
-    
+    if(err)
+    console.log(err)
 })
 const db = mongoose.connection
 db.on('err', () => {
