@@ -3,23 +3,23 @@ const mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 
 const { dbUrl } = require('./config')
-// const schema = require('./schema')
+const schema = require('./schema')
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-// mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (err, result) => {
-//     if(err)
-//     console.log(err)
-// })
-// const db = mongoose.connection
-// db.on('err', () => {
-//     console.log('error in connection')
-// })
-// db.once('open', () => {
-//     console.log('database is ready')
-// })
+mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (err, result) => {
+    if(err)
+    console.log(err)
+})
+const db = mongoose.connection
+db.on('err', () => {
+    console.log('error in connection')
+})
+db.once('open', () => {
+    console.log('database is ready')
+})
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
@@ -35,4 +35,8 @@ app.post('/new', (req, res)  => {
     feedback.save().then(() => {
         res.send({ result: true})
     })
+})
+
+app.get('/', (req, res) => {
+ res.send({status: true})   
 })
