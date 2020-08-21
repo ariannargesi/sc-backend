@@ -2,7 +2,7 @@ const app = require('express')()
 const mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 
-const { dbUrl, port } = require('./config')
+const { dbUrl } = require('./config')
 const schema = require('./schema')
 
 
@@ -17,6 +17,9 @@ db.on('err', () => {
 db.once('open', () => {
     console.log('database is ready')
 })
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
 
 app.listen(port, () => {
     console.log('app is running on port')
