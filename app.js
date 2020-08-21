@@ -30,3 +30,7 @@ app.post('/new', (req, res)  => {
         res.send({ result: true})
     })  
 })
+
+app.get('/', (req, res) => {
+    res.send({status: 'running'})
+})
