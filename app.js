@@ -6,7 +6,7 @@ const { dbUrl, port } = require('./config')
 const schema = require('./schema')
 
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false , useUnifiedTopology: true}))
 
 
 mongoose.connect(dbUrl, {useNewUrlParser: true})
