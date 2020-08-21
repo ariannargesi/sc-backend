@@ -9,7 +9,9 @@ const schema = require('./schema')
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (err, result) => {
+    
+})
 const db = mongoose.connection
 db.on('err', () => {
     console.log('error in connection')
