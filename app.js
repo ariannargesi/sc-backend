@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 
 const { dbUrl } = require('./config')
-const schema = require('./schema')
+// const schema = require('./schema')
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
