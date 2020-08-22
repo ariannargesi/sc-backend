@@ -1,13 +1,13 @@
 const app = require('express')()
 const mongoose = require('mongoose')
-var bodyParser = require('body-parser')
-
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const { dbUrl } = require('./config')
 const schema = require('./schema')
 
 
-app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(bodyParser.json())
+app.use(cors())
 
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (err, result) => {
     if(err)
@@ -29,14 +29,24 @@ app.listen(port, () => {
 })
 
 app.post('/new', (req, res)  => {
-    const content = req.body.feedback 
+    const content = req.body.feedback
+    if(content.length < 1000){
     const date = new Date().getDate
     const feedback = new schema({content, date})
-    feedback.save().then(() => {
-        res.send({ result: true})
+    feedback.save()
+    .then(() => {
+        res.send({ result: true, str: "feedback saved"})    
     })
+    .catch( () => res.send({result: false, str: "error in saving feedback"}) )
+    }
+    else {
+        res.send({status: false, str: "str it's to long"})
+    }
 })
 
 app.get('/', (req, res) => {
  res.send({status: true})   
 })
+
+
+const log = x => console.log(x)
