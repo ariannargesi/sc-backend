@@ -31,13 +31,13 @@ app.listen(port, () => {
 app.post('/new', (req, res)  => {
     const content = req.body.feedback
     if(content.length < 1000){
-    const date = new Date().getDate
+    const date = new Date()
     const feedback = new schema({content, date})
     feedback.save()
     .then(() => {
         res.send({ result: true, str: "feedback saved"})    
     })
-    .catch( () => res.send({result: false, str: "error in saving feedback"}) )
+    .catch( (err) => res.send({result: false, str: "error in saving feedback", err}) )
     }
     else {
         res.send({status: false, str: "str it's to long"})
